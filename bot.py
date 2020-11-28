@@ -1,7 +1,9 @@
 import discord
 import requests
+import os
 from bs4 import BeautifulSoup
-from config import token
+
+token = os.getenv("simp_AI")
 
 def get_camel_rank():
 	url = "https://tracker.gg/valorant/profile/riot/camellCase%23NA1/overview"
