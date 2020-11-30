@@ -25,35 +25,37 @@ print(tagdict)
 
 @client.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+	print('We have logged in as {0.user}'.format(client))
 
 @client.event
 async def on_message(message):
-    if message.author == client.user:
-        return
+	global camel_rank
+	if message.author == client.user:
+		return
 
-    if message.content.startswith('$camel'):
-    	cur_rank = get_rank("camellCase#NA1")
-    	await message.channel.send(get_rank("camellCase#NA1"))
-    	if cur_rank != camel_rank:
-    		await message.channel.send("<@&781636133762629632>, camel rank has changed to " + cur_rank + "!")
-    		camel_rank = cur_rank
-        
+	if message.content.startswith('$camel'):
+		cur_rank = get_rank("camellCase#NA1")
+		await message.channel.send(get_rank("camellCase#NA1"))
+		if cur_rank != camel_rank:
+			await message.channel.send("<@&781636133762629632>, camel rank has changed to " + cur_rank + "!")
+			camel_rank = cur_rank
+		
 
-    elif message.content.startswith('$rank'):
-    	await message.channel.send(get_rank(message.content[6:]))
+	elif message.content.startswith('$rank'):
+		await message.channel.send(get_rank(message.content[6:]))
 
-    elif message.content.startswith('$userrank'):
-    	if message.mentions[0] not in tagdict:
-    		await message.channel.send("bad")
-    	else:
-    		await message.channel.send(get_rank(tagdict[message.mentions[0]]))
-    	
-
-	elif message.content.startsith('$setrank'):
-		tagdict[message.author] = message.content[9:]
-		await message.channel.send("Rank for " + message.author.mention " set to " + message.content[9:])
+	elif message.content.startswith('$userrank'):
+		if message.mentions[0].id not in tagdict:
+			await message.channel.send("bad")
+		else:
+			await message.channel.send(get_rank(tagdict[message.mentions[0].id]))
+		
+	elif message.content.startswith('$setrank'):
+		tagdict[message.author.id] = message.content[9:]
+		await message.channel.send("Rank for " + message.author.mention + " set to " + message.content[9:])
 
 	elif message.content.startswith("$export"):
 		print(tagdict)
+
+client.run(token)
 
