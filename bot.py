@@ -20,6 +20,8 @@ def get_rank(name):
 
 client = discord.Client()
 camel_rank = get_rank("camellCase#NA1")
+tagdict = eval(open("tags", "r").read())
+print(tagdict)
 
 @client.event
 async def on_ready():
@@ -40,3 +42,18 @@ async def on_message(message):
 
     elif message.content.startswith('$rank'):
     	await message.channel.send(get_rank(message.content[6:]))
+
+    elif message.content.startswith('$userrank'):
+    	if message.mentions[0] not in tagdict:
+    		await message.channel.send("bad")
+    	else:
+    		await message.channel.send(get_rank(tagdict[message.mentions[0]]))
+    	
+
+	elif message.content.startsith('$setrank'):
+		tagdict[message.author] = message.content[9:]
+		await message.channel.send("Rank for " + message.author.mention " set to " + message.content[9:])
+
+	elif message.content.startswith("$export"):
+		print(tagdict)
+
