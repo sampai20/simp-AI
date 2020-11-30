@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 token = os.getenv("simp_AI")
 
 def get_rank(name):
-	url = "https://tracker.gg/valorant/profile/riot/" + name.replace("#", "%23") + "/overview"
+	url = "https://tracker.gg/valorant/profile/riot/" + name.replace("#", "%23") + "/overview?playlist=competitive"
 	req = requests.get(url)
 	soup = BeautifulSoup(req.content, "html.parser")
 	ans = ""
@@ -17,7 +17,7 @@ def get_rank(name):
 	return ans
 
 def get_camel_rank():
-	url = "https://tracker.gg/valorant/profile/riot/camellCase%23NA1/overview"
+	url = "https://tracker.gg/valorant/profile/riot/camellCase%23NA1/overview?playlist=competitive"
 	req = requests.get(url)
 	soup = BeautifulSoup(req.content, "html.parser")
 	return soup.find_all("span", class_="valorant-highlighted-stat__value")[0].text
