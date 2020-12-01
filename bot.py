@@ -33,6 +33,9 @@ async def on_message(message):
 	if message.author == client.user:
 		return
 
+	if message.channel.id == 783122496857440296:
+		return
+
 	if message.content.startswith('$camel'):
 		cur_rank = get_rank("camellCase#NA1")
 		await message.channel.send(get_rank("camellCase#NA1"))
