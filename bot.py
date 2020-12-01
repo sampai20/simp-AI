@@ -33,7 +33,7 @@ async def on_message(message):
 	if message.author == client.user:
 		return
 
-	if message.channel.id == 783122496857440296:
+	if message.channel.id == 783123388469084181:
 		return
 
 	if message.content.startswith('$camel'):
