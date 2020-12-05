@@ -22,7 +22,9 @@ class Ranks(commands.Cog):
 
 	@commands.command()
 	async def camel(self, ctx):
+		print("called by " + str(ctx.message.author))
 		cur_rank = get_rank("camellCase#NA1")
+		print("here!")
 		await ctx.send(get_rank("camellCase#NA1"))
 		if cur_rank != self.camel_rank and cur_rank != "bad":
 			await ctx.send("<@&781636133762629632>, camel rank has changed to " + cur_rank + "!")
