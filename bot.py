@@ -39,7 +39,7 @@ async def on_message(message):
 	if message.content.startswith('$camel'):
 		cur_rank = get_rank("camellCase#NA1")
 		await message.channel.send(get_rank("camellCase#NA1"))
-		if cur_rank != camel_rank:
+		if cur_rank != camel_rank and cur_rank != "bad":
 			await message.channel.send("<@&781636133762629632>, camel rank has changed to " + cur_rank + "!")
 			camel_rank = cur_rank
 		
