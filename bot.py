@@ -5,6 +5,7 @@ import os
 
 bot = commands.Bot(command_prefix="$")
 bot.load_extension('cogs.ranks')
+bot.load_extension('cogs.tags')
 
 
 @bot.event

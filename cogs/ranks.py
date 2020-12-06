@@ -1,4 +1,5 @@
 from discord.ext import commands
+import discord
 import urllib
 from bs4 import BeautifulSoup
 import requests
@@ -22,9 +23,7 @@ class Ranks(commands.Cog):
 
 	@commands.command()
 	async def camel(self, ctx):
-		print("called by " + str(ctx.message.author))
 		cur_rank = get_rank("camellCase#NA1")
-		print("here!")
 		await ctx.send(get_rank("camellCase#NA1"))
 		if cur_rank != self.camel_rank and cur_rank != "bad":
 			await ctx.send("<@&781636133762629632>, camel rank has changed to " + cur_rank + "!")
@@ -33,6 +32,15 @@ class Ranks(commands.Cog):
 	@commands.command()
 	async def rank(self, ctx):
 		await ctx.send(get_rank(ctx.message.content[6:]))
+
+	@commands.command()
+	async def userrank(self, ctx, member: discord.Member):
+		tagcog = self.bot.get_cog("Tags")
+		usertag = tagcog.get_tag(str(member))
+		if usertag == "bad":
+			await ctx.send("Tag not set for that user.")
+		else:
+			await ctx.send(get_rank(usertag))
 
 def setup(bot):
 	bot.add_cog(Ranks(bot))
